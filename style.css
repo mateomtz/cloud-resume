@@ -9,19 +9,23 @@ body {
 .content {
   display: inline flex;
   width: 100%;
-}
-
-#header {
-  background-color: yellow;
   
 }
 
+#header {
+  background-color: aqua;
+}
+
 #contact-info {
-  background-color: red;
   width: 20%;
+  border-right: solid;
+  right: -10px;
+  background-color: aquamarine
 }
 
 #qualifications {
-  background-color: blue;
-  width: 60%
+  margin-left: 10px;
+  width: 60%;
+  background-color: beige;
+  
 }
