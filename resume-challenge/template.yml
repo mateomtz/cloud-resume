@@ -18,6 +18,7 @@ Resources:
       BucketName: my-resume-website-mm
       WebsiteConfiguration: 
         IndexDocument: Index.html
+        ErrorDocument: Index.html
       
 
   BucketReadPolicy:
