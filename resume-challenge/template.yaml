@@ -19,35 +19,30 @@ Resources:
       BucketName: my-resume-website-mm
       WebsiteConfiguration: 
         IndexDocument: Index.html
-        ErrorDocument: Index.html
+        ErrorDocument: Index.html     
 
-  # Defining a CloudFront Distribution that redirects to the the S3 Bucket using HTTPS
+# Defining a CloudFront Distribution that redirects to the the S3 Bucket. This will need to be eventually updated
+# to use HTTPS insetad of allowing all protocols. It will also need to be changed to use a DomainName attribute
+# instead of hard coding the TargetOriginId Attribute.
   MyDistribution:
-  Type: AWS::CloudFront::Distribution
-  Properties:
-    DistributionConfig:
-      Origins: 
-      - ID: S3Origin
-        DomainName: !GetAtt MyWebsite.DomainName
-        S3OriginConfig:
-          OriginAccessIdenity: ""
-      Enabled: true
-      DefaultRootObject: index.html
-      DefaultCacheBehavior:
-        TargetOriginID: 
-        ViewerProtocolPolicy: redirect-to-https
-        AllowedMethods:
-          - GET
-          - HEAD
-        CachedMethods:
-          - GET
-          - HEAD
-        ForwardedValues:
-          QueryString: false
-      PriceClass: PriceClass_100  # Use PriceClass_100, PriceClass_200, or PriceClass_All
-      ViewerCertificate:
-          CloudFrontDefaultCertificate: true  # Change to an ACM certificate if using a custom domain
-        
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          ViewerProtocolPolicy: allow-all
+          TargetOriginId: my-resume-website-mm.s3-website.us-east-2.amazonaws.com
+          DefaultTTL: 0
+          MinTTL: 0
+          MaxTTL: 0
+          ForwardedValues:
+            QueryString: false
+        Origins:
+          - DomainName: my-resume-website-mm.s3-website.us-east-2.amazonaws.com
+            Id: my-resume-website-mm.s3-website.us-east-2.amazonaws.com
+            CustomOriginConfig:
+              OriginProtocolPolicy: match-viewer
+        Enabled: true
+        DefaultRootObject: index.html  
       
   #Applying a policy to the S3 bucket already defined that allows for public access.
   BucketReadPolicy:
@@ -93,9 +88,4 @@ Outputs:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
   
-  WebsiteURL:
-    Description: URL of the website
-    Value: !GetAtt MyWebsiteBucket.WebsiteURL
-  CloudFrontDistributionDomainName:
-    Description: CloudFront Distribution Domain Name
-    Value: !GetAtt MyDistribution.DomainName
+
