@@ -10,8 +10,9 @@ Globals:
   Function:
     Timeout: 3
     MemorySize: 128
-
+# Defining resources in AWS
 Resources:
+  # Defining an S3 bucket named my-resume-website-mm that holds a document for a static website with html file index.html
   MyWebsite:
     Type: AWS::S3::Bucket
     Properties:
@@ -19,8 +20,36 @@ Resources:
       WebsiteConfiguration: 
         IndexDocument: Index.html
         ErrorDocument: Index.html
-      
 
+  # Defining a CloudFront Distribution that redirects to the the S3 Bucket using HTTPS
+  MyDistribution:
+  Type: AWS::CloudFront::Distribution
+  Properties:
+    DistributionConfig:
+      Origins: 
+      - ID: S3Origin
+        DomainName: !GetAtt MyWebsite.DomainName
+        S3OriginConfig:
+          OriginAccessIdenity: ""
+      Enabled: true
+      DefaultRootObject: index.html
+      DefaultCacheBehavior:
+        TargetOriginID: 
+        ViewerProtocolPolicy: redirect-to-https
+        AllowedMethods:
+          - GET
+          - HEAD
+        CachedMethods:
+          - GET
+          - HEAD
+        ForwardedValues:
+          QueryString: false
+      PriceClass: PriceClass_100  # Use PriceClass_100, PriceClass_200, or PriceClass_All
+      ViewerCertificate:
+          CloudFrontDefaultCertificate: true  # Change to an ACM certificate if using a custom domain
+        
+      
+  #Applying a policy to the S3 bucket already defined that allows for public access.
   BucketReadPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -34,6 +63,7 @@ Resources:
             Action: 's3:GetObject'
             Resource: !Sub "${MyWebsite.Arn}/*"
 
+  # Hellow world function initially defined by SAM. (Unused)
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -62,3 +92,10 @@ Outputs:
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+  
+  WebsiteURL:
+    Description: URL of the website
+    Value: !GetAtt MyWebsiteBucket.WebsiteURL
+  CloudFrontDistributionDomainName:
+    Description: CloudFront Distribution Domain Name
+    Value: !GetAtt MyDistribution.DomainName
