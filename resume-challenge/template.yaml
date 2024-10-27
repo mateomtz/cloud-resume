@@ -16,7 +16,7 @@ Resources:
   MyWebsite:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: my-resume-website-mm
+      BucketName: mateomartinez.net
       WebsiteConfiguration: 
         IndexDocument: Index.html
         ErrorDocument: Index.html     
@@ -30,15 +30,15 @@ Resources:
       DistributionConfig:
         DefaultCacheBehavior:
           ViewerProtocolPolicy: allow-all
-          TargetOriginId: my-resume-website-mm.s3-website.us-east-2.amazonaws.com
+          TargetOriginId: mateomartinez.net.s3-website.us-east-2.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0
           MaxTTL: 0
           ForwardedValues:
             QueryString: false
         Origins:
-          - DomainName: my-resume-website-mm.s3-website.us-east-2.amazonaws.com
-            Id: my-resume-website-mm.s3-website.us-east-2.amazonaws.com
+          - DomainName: mateomartinez.net.s3-website.us-east-2.amazonaws.com
+            Id: mateomartinez.net.s3-website.us-east-2.amazonaws.com
             CustomOriginConfig:
               OriginProtocolPolicy: match-viewer
         Enabled: true
@@ -58,7 +58,7 @@ Resources:
             Action: 's3:GetObject'
             Resource: !Sub "${MyWebsite.Arn}/*"
 
-  # Hellow world function initially defined by SAM. (Unused)
+  # Hello world function initially defined by SAM. (Unused)
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
