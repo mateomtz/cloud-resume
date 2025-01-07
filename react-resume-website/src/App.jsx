@@ -1,10 +1,7 @@
-import styles from
-
 function App() {
 
-  return (
-    <div>Hello World!</div>
-  )
+  return <div className={styles.App}>Hello World!</div>;
+  
 }
 
 export default App
