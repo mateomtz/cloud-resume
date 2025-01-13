@@ -40,7 +40,7 @@ Resources:
     Properties:
       DistributionConfig:
         DefaultCacheBehavior:
-          ViewerProtocolPolicy: allow-all
+          ViewerProtocolPolicy: redirect-to-https
           TargetOriginId: mateomartinez.net.s3-website.us-east-2.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0
