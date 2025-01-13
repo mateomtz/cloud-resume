@@ -64,7 +64,7 @@ Resources:
         Enabled: true
         DefaultRootObject: Index.html  
         ViewerCertificate:
-          AcmCertificateArn: arn:aws:acm:us-east-1:676206935526:certificate/29ef241e-ff65-418e-ae6a-d13b2a046ef9
+          AcmCertificateArn: arn:aws:acm:us-east-1:676206935526:certificate/d4a4ccc5-350e-45c5-aa30-eeaeecc171d8
           SslSupportMethod: "sni-only"
         Aliases:
           - "mateomartinez.net"
