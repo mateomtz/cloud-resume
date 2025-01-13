@@ -40,7 +40,7 @@ Resources:
     Properties:
       DistributionConfig:
         DefaultCacheBehavior:
-          ViewerProtocolPolicy: redirect-to-https
+          ViewerProtocolPolicy: "allow-all"
           TargetOriginId: mateomartinez.net.s3-website.us-east-2.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0
@@ -51,28 +51,28 @@ Resources:
           - DomainName: mateomartinez.net.s3-website.us-east-2.amazonaws.com
             Id: mateomartinez.net.s3-website.us-east-2.amazonaws.com
             CustomOriginConfig:
-              OriginProtocolPolicy: https-only
+              OriginProtocolPolicy: match-viewer
         Enabled: true
-        DefaultRootObject: index.html  
+        DefaultRootObject: Index.html  
       
   #Applying a policy to the S3 bucket already defined that allows for public access.
   #This can only be applied to a bucket that does not already have a policy defined.
-  #BucketReadPolicy:
-  #  Type: AWS::S3::BucketPolicy
-  #  Properties:
-  #    PolicyDocument:
-  #      Version: "2012-10-17"
-  #      Statement:
-  #        - Sid: PublicReadForGetBucketObjects
-  #          Effect: Allow
-  #          Principal: "*"
-  #          Action: "s3:GetObject"
-  #          Resource: !Join
-  #            - ""
-  #            - - "arn:aws:s3:::"
-  #              - !Ref MyWebsite
-  #              - /* 
-  #    Bucket: !Ref MyWebsite
+  BucketReadPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref MyWebsite
+                - /* 
+      Bucket: !Ref MyWebsite
 
   # Hello world function initially defined by SAM. (Unused)
   HelloWorldFunction:
