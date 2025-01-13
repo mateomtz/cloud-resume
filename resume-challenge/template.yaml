@@ -21,16 +21,24 @@ Resources:
         IndexDocument: Index.html
         ErrorDocument: Index.html
 
- # MyRoute53Record:
- #   Type: "AWS::Route53::RecordSetGroup"
- #   Properties:
- #     HostedZoneId: # Add hosted zone ID
- #     RecordSets:
- #       - Name: #add name
- #         Type: # Add type (should be a record)
- #         AliasTarget:
- #           HostedZoneId: #add alias hosted zone id
- #           DNSName: !GetAtt MyDistribution.DomainName
+# Adding route 53 record to attach a domain name to the CloudFront distribution
+  MyRoute53Record:
+    Type: "AWS::Route53::RecordSetGroup"
+    Properties:
+      HostedZoneId: Z10016943PSULIFC0ZYBD
+      RecordSets:
+        - Name: mateomartinez.net # TODO: don't hardcode me
+          Type: A
+          AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2
+            DNSName: !GetAtt MyDistribution.DomainName
+
+  MyCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: mateomartinez.net
+      ValidationMethod: DNS
+
 
 # Defining a CloudFront Distribution that redirects to the the S3 Bucket. This will need to be eventually updated
 # to use HTTPS insetad of allowing all protocols. It will also need to be changed to use a DomainName attribute
