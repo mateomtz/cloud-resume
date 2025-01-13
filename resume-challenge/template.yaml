@@ -56,22 +56,23 @@ Resources:
         DefaultRootObject: index.html  
       
   #Applying a policy to the S3 bucket already defined that allows for public access.
-  BucketReadPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      PolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Sid: PublicReadForGetBucketObjects
-            Effect: Allow
-            Principal: "*"
-            Action: "s3:GetObject"
-            Resource: !Join
-              - ""
-              - - "arn:aws:s3:::"
-                - !Ref MyWebsite
-                - /* 
-      Bucket: !Ref MyWebsite
+  #This can only be applied to a bucket that does not already have a policy defined.
+  #BucketReadPolicy:
+  #  Type: AWS::S3::BucketPolicy
+  #  Properties:
+  #    PolicyDocument:
+  #      Version: "2012-10-17"
+  #      Statement:
+  #        - Sid: PublicReadForGetBucketObjects
+  #          Effect: Allow
+  #          Principal: "*"
+  #          Action: "s3:GetObject"
+  #          Resource: !Join
+  #            - ""
+  #            - - "arn:aws:s3:::"
+  #              - !Ref MyWebsite
+  #              - /* 
+  #    Bucket: !Ref MyWebsite
 
   # Hello world function initially defined by SAM. (Unused)
   HelloWorldFunction:
