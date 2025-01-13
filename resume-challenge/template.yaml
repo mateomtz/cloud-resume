@@ -51,7 +51,7 @@ Resources:
           - DomainName: mateomartinez.net.s3-website.us-east-2.amazonaws.com
             Id: mateomartinez.net.s3-website.us-east-2.amazonaws.com
             CustomOriginConfig:
-              OriginProtocolPolicy: match-viewer
+              OriginProtocolPolicy: https-only
         Enabled: true
         DefaultRootObject: index.html  
       
