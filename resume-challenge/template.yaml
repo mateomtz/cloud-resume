@@ -19,7 +19,18 @@ Resources:
       BucketName: mateomartinez.net
       WebsiteConfiguration: 
         IndexDocument: Index.html
-        ErrorDocument: Index.html     
+        ErrorDocument: Index.html
+
+ # MyRoute53Record:
+ #   Type: "AWS::Route53::RecordSetGroup"
+ #   Properties:
+ #     HostedZoneId: # Add hosted zone ID
+ #     RecordSets:
+ #       - Name: #add name
+ #         Type: # Add type (should be a record)
+ #         AliasTarget:
+ #           HostedZoneId: #add alias hosted zone id
+ #           DNSName: !GetAtt MyDistribution.DomainName
 
 # Defining a CloudFront Distribution that redirects to the the S3 Bucket. This will need to be eventually updated
 # to use HTTPS insetad of allowing all protocols. It will also need to be changed to use a DomainName attribute
