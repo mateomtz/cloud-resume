@@ -32,11 +32,20 @@ def lambda_handler(event, context):
     #     print(e)
 
     #     raise e
+    ## This is temporary, come back to fix this later
+    # Define headers as a dictionary
+    headers = {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*"
+        }
+
+    # Define the body as a formatted string
+    body = json.dumps({"count": 2})
+    
 
     return {
         "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
+        "headers": headers,
+        "body": body
     }

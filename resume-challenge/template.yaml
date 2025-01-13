@@ -22,6 +22,7 @@ Resources:
         ErrorDocument: Index.html
 
 # Adding route 53 record to attach a domain name to the CloudFront distribution
+# Only declare this when this record is not present for this Hosted Zone in Route 53. If it is, comment it out.
   MyRoute53Record:
     Type: "AWS::Route53::RecordSetGroup"
     Properties:
