@@ -41,15 +41,15 @@ Resources:
       DistributionConfig:
         DefaultCacheBehavior:
           ViewerProtocolPolicy: "redirect-to-https"
-          TargetOriginId: mateomartinez.net.s3-website.us-east-2.amazonaws.com
+          TargetOriginId: mateomartinez.net.s3.us-east-2.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0
           MaxTTL: 0
           ForwardedValues:
             QueryString: false
         Origins:
-          - DomainName: mateomartinez.net.s3-website.us-east-2.amazonaws.com
-            Id: mateomartinez.net.s3-website.us-east-2.amazonaws.com
+          - DomainName: mateomartinez.net.s3.us-east-2.amazonaws.com
+            Id: mateomartinez.net.s3.us-east-2.amazonaws.com
             CustomOriginConfig:
               OriginProtocolPolicy: "https-only"
         Enabled: true
