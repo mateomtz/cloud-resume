@@ -1,97 +1,144 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Resume</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+  <head>
+    <!--this script makes a fetch request to our API Gateway -> parses responses & injects the response from API
+     into our page-->
+    <script>
+      fetch("https://s2pf6911yi.execute-api.us-east-2.amazonaws.com/Prod/hello")
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("replaceme").innerText = data.count;
+        });
+    </script>
+    <title>Resume</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
     <!--Section that contains header info:
-    -name
-    -resume title
-    etc
-    -->
+        -name
+        -resume title
+        etc
+        -->
     <section id="header">
-        <h1 id="intro">Resume</h1>
-        <h2 id="intro">Mateo Martinez</h2>
+      <h1 id="intro">Resume</h1>
+      <h2 id="intro">Mateo Martinez</h2>
     </section>
-
 
     <!--styling element that contains both contact-info and qualifications sections-->
     <div class="content">
-        <!--Section that contains contact info:
-        -email
-        LinkedIn
-        Phone Number-->
-        <div id="contact-info">
-            <h2 id="contact info" class="contact styling">Contact Info</h2>
-            <div>
-                <p>Mateo30mtz@gmail.com</p>
-                <p>(509) 449-8243</p>
-                <a href="https://www.linkedin.com/in/mateo-martinez-96b9331a8">LinkedIn</a>
-            </div>
-            <!--testing removing this
-            <div id="contact info" class="row">
-                <div id="contact info" class="column"><p class="column">Mateo30mtz@gmail.com</p></div>
-                <div id="contact info" class="column"><p class="column">(509) 449-8243</p></div>
-                <div id="contact info" class="column"><a class="column" href="https://www.linkedin.com/in/mateo-martinez-96b9331a8">LinkedIn</a></div>
-            </div>
-            -->
+      <!--Section that contains contact info:
+            -email
+            LinkedIn
+            Phone Number-->
+      <div id="contact-info">
+        <h2 id="contact info" class="contact styling">Contact Info</h2>
+        <div>
+          <p>Mateo30mtz@gmail.com</p>
+          <p>(509) 449-8243</p>
+          <a href="https://www.linkedin.com/in/mateo-martinez-96b9331a8"
+            >LinkedIn</a
+          >
+        </div>
+        <!--testing removing this
+                <div id="contact info" class="row">
+                    <div id="contact info" class="column"><p class="column">Mateo30mtz@gmail.com</p></div>
+                    <div id="contact info" class="column"><p class="column">(509) 449-8243</p></div>
+                    <div id="contact info" class="column"><a class="column" href="https://www.linkedin.com/in/mateo-martinez-96b9331a8">LinkedIn</a></div>
+                </div>
+                -->
+      </div>
+
+      <!--Section that contains qualications
+            -work experience
+            -certs
+            -education
+            -skils-->
+      <div id="qualifications">
+        <div id="certs">
+          <h2 id="certs">Certifications</h2>
+          <ul id="certs">
+            <li>CompTIA Network+</li>
+            <li>Azure Fundamentals (AZ-900)</li>
+          </ul>
         </div>
 
-        <!--Section that contains qualications
-        -work experience
-        -certs
-        -education
-        -skils-->
-        <div id="qualifications">
-            <div id="certs">
-                <h2 id="certs">Certifications</h2>
-                <ul id="certs">
-                    <li>CompTIA Network+</li>
-                    <li>Azure Fundamentals (AZ-900)</li>
-                </ul>
-            </div>
-        
-            <div id="experience">
-                <h2 id="experience">Work Experience</h2>
-                <!--First work experience listing-->
-                <h3>Senior IT End-User Systems Support Administrator, 1</h3>
-                <p>Dotdash Meredith, March 2024-Present</p>
-                <ul>
-                    <li>Guided more junior team members such as providing troubleshooting tips, how to handle upset customers, and serving as an escalation point.</li>
-                    <li>Served as an SME for our password manager, Keeper, including troubleshooting account issues and contacting vendors for in-depth troubleshooting.</li>
-                    <li>Updated and managed assets through Jamf & Intune working in tandem with Oomnitza.</li>
-                </ul>
-                <!--Second work experience listing-->
-                <h3>IT End-User Systems Support Administrator, 2</h3>
-                <p>Dotdash Meredith, June 2022-March 2024</p>
-                <ul>
-                    <li>Provided technical support over the phone, email, or through a remote support client while meeting the SLA for the first contact of 15 minutes.</li>
-                    <li>Configured and deployed devices to new hires as part of the onboarding process, including device orientation.</li>
-                    <li>Coordinated with other service desk members in a device refresh project that included identifying, locating, and replacing ~1000 Windows devices.</li>
-                </ul>
-                <!--Third work experience listing-->
-                <h3>Assistant System Administrator</h3>
-                <p>Gonzaga University, January 2021-May 2022</p>
-                <ul>
-                    <li>Managed servers running Windows Server or Linux OS including performing updates during downtime, maintaining load balancing between UPSs, and swapping out physical hardware</li>
-                    <li>Created and documented imaging process for MacOS labs through JAMF.</li>
-                    <li>Responded to and resolved user issues/requests through FreshService ticketing system.</li>
-                </ul>
-            </div>
-        
-            <div id="skills">
-                <h2 id="technical skills">Technical Skills</h2>
-                <ul>
-                    <li>MacOS, Windows, Linux</li>
-                    <li>Server Maintenance, Server Backups</li>
-                    <li>Python, HTML, CSS, Javascript, C++, Powershell, Git</li>
-                    <li>Cisco Secure Client, Jamf, Intune, Munki, SimpleMDM, Microsoft Office, G-Suite</li>
-                </ul>
-            </div> 
+        <div id="experience">
+          <h2 id="experience">Work Experience</h2>
+          <!--First work experience listing-->
+          <h3>Senior IT End-User Systems Support Administrator, 1</h3>
+          <p>Dotdash Meredith, March 2024-Present</p>
+          <ul>
+            <li>
+              Guided more junior team members such as providing troubleshooting
+              tips, how to handle upset customers, and serving as an escalation
+              point.
+            </li>
+            <li>
+              Served as an SME for our password manager, Keeper, including
+              troubleshooting account issues and contacting vendors for in-depth
+              troubleshooting.
+            </li>
+            <li>
+              Updated and managed assets through Jamf & Intune working in tandem
+              with Oomnitza.
+            </li>
+          </ul>
+          <!--Second work experience listing-->
+          <h3>IT End-User Systems Support Administrator, 2</h3>
+          <p>Dotdash Meredith, June 2022-March 2024</p>
+          <ul>
+            <li>
+              Provided technical support over the phone, email, or through a
+              remote support client while meeting the SLA for the first contact
+              of 15 minutes.
+            </li>
+            <li>
+              Configured and deployed devices to new hires as part of the
+              onboarding process, including device orientation.
+            </li>
+            <li>
+              Coordinated with other service desk members in a device refresh
+              project that included identifying, locating, and replacing ~1000
+              Windows devices.
+            </li>
+          </ul>
+          <!--Third work experience listing-->
+          <h3>Assistant System Administrator</h3>
+          <p>Gonzaga University, January 2021-May 2022</p>
+          <ul>
+            <li>
+              Managed servers running Windows Server or Linux OS including
+              performing updates during downtime, maintaining load balancing
+              between UPSs, and swapping out physical hardware
+            </li>
+            <li>
+              Created and documented imaging process for MacOS labs through
+              JAMF.
+            </li>
+            <li>
+              Responded to and resolved user issues/requests through
+              FreshService ticketing system.
+            </li>
+          </ul>
         </div>
+
+        <div id="skills">
+          <h2 id="technical skills">Technical Skills</h2>
+          <ul>
+            <li>MacOS, Windows, Linux</li>
+            <li>Server Maintenance, Server Backups</li>
+            <li>Python, HTML, CSS, Javascript, C++, Powershell, Git</li>
+            <li>
+              Cisco Secure Client, Jamf, Intune, Munki, SimpleMDM, Microsoft
+              Office, G-Suite
+            </li>
+          </ul>
+        </div>
+        <p>
+          Visitors:
+          <span id="replaceme"></span>
+        </p>
+      </div>
     </div>
-
-
-</body>
+  </body>
 </html>
