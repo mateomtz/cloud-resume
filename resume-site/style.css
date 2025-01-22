@@ -13,19 +13,19 @@ body {
 }
 
 #header {
-  background-color: aqua;
+  background-color: white;
 }
 
 #contact-info {
   width: 20%;
   border-right: solid;
   right: -10px;
-  background-color: aquamarine
+  background-color: white
 }
 
 #qualifications {
   margin-left: 10px;
   width: 60%;
-  background-color: beige;
+  background-color: white;
   
 }
