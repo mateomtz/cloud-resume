@@ -59,7 +59,7 @@ Resources:
             QueryString: false
         Origins:
           - DomainName: mateomartinez.net.s3.amazonaws.com
-            Id: mateomartinez.net.amazonaws.com
+            Id: mateomartinez.net.s3.amazonaws.com
             CustomOriginConfig:
               OriginProtocolPolicy: "https-only"
         Enabled: true
