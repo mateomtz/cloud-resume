@@ -68,7 +68,19 @@ Resources:
           AcmCertificateArn: arn:aws:acm:us-east-1:676206935526:certificate/d4a4ccc5-350e-45c5-aa30-eeaeecc171d8
           SslSupportMethod: "sni-only"
         Aliases:
-          - "mateomartinez.net"
+          - mateomartinez.net
+
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: cloud-resume-challenge
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
       
   #Applying a policy to the S3 bucket already defined that allows for public access.
   #This can only be applied to a bucket that does not already have a policy defined.
