@@ -102,7 +102,7 @@ Resources:
       Bucket: !Ref MyWebsite
 
   # Hello world function initially defined by SAM. (Unused)
-  HelloWorldFunction:
+  GetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: hello_world/
