@@ -1,51 +1,50 @@
-import json
+import logging
+import boto3
+from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyRequest, APIGatewayProxyResponse
+from aws_lambda_powertools.utilities.data_classes import event_source
 
-# import requests
+# Initialize DynamoDB client
+dynamodb = boto3.client('dynamodb')
 
-
-def lambda_handler(event, context):
-    """Sample pure Lambda function
-
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
-
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
-
-    context: object, required
-        Lambda Context runtime methods and attributes
-
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
-
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
-
-    #     raise e
-    ## This is temporary, come back to fix this later
-    # Define headers as a dictionary
-    headers = {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "*",
-            "Access-Control-Allow-Headers": "*"
+def handler(event, context):
+    try:
+        # Define parameters for updating DynamoDB item
+        table_name = "cloud-resume-challenge"
+        key = {
+            "ID": {"S": "visitors"}
+        }
+        update_expression = "ADD visitors :inc"
+        expression_attribute_values = {
+            ":inc": {"N": "1"}
         }
 
-    # Define the body as a formatted string
-    body = json.dumps({"count": 2})
-    
+        # Update item in DynamoDB
+        response = dynamodb.update_item(
+            TableName=table_name,
+            Key=key,
+            UpdateExpression=update_expression,
+            ExpressionAttributeValues=expression_attribute_values
+        )
 
-    return {
-        "statusCode": 200,
-        "headers": headers,
-        "body": body
-    }
+    except Exception as e:
+        logging.error(f"Got error calling update_item: {e}")
+        raise
+
+    # Return a successful response with CORS headers
+    return APIGatewayProxyResponse(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*",
+        },
+        body="",
+    )
+
+
+# For local testing or actual Lambda function execution
+if __name__ == "__main__":
+    # Simulate an API Gateway ProxyRequest for testing
+    event = {}  # You can replace this with a mock event for local testing
+    context = {}  # Replace with your context object if needed
+    handler(event, context)
