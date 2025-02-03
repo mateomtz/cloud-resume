@@ -59,7 +59,7 @@ Resources:
             QueryString: false
         Origins:
           - DomainName: mateomartinez.net.s3.amazonaws.com
-            Id: mateomartinez.net.amazonaws.com
+            Id: mateomartinez.net.s3.amazonaws.com
             CustomOriginConfig:
               OriginProtocolPolicy: "https-only"
         Enabled: true
@@ -91,23 +91,7 @@ Resources:
       Bucket: !Ref MyWebsite
 
   # Hello world function initially defined by SAM. (Unused)
-  GetFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: get-function/
-      Handler: get-function
-      Runtime: python3.9
-      Architectures:
-        - x86_64
-      Events:
-        GetFunction:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /get
-            Method: get
-
-  # Hello world function initially defined by SAM. (Unused)
-  PutFunction:
+  HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: hello_world/
@@ -121,6 +105,8 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+
+  
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
