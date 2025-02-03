@@ -70,17 +70,6 @@ Resources:
         Aliases:
           - mateomartinez.net
 
-  DynamoDBTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: cloud-resume-challenge
-      BillingMode: PAY_PER_REQUEST
-      AttributeDefinitions:
-        - AttributeName: "ID"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "ID"
-          KeyType: "HASH"
       
   #Applying a policy to the S3 bucket already defined that allows for public access.
   #This can only be applied to a bucket that does not already have a policy defined.
@@ -103,6 +92,22 @@ Resources:
 
   # Hello world function initially defined by SAM. (Unused)
   GetFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: get-function/
+      Handler: get-function
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        GetFunction:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /get
+            Method: get
+
+  # Hello world function initially defined by SAM. (Unused)
+  PutFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: hello_world/
