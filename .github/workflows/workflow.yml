@@ -1,9 +1,20 @@
 name: Upload Website
+#on denotes on what event to perform this action.
+#Here, we are saying to perform this on pushes to branch 'main'
 on:
   push:
     branches:
       - main
 
+#This job, titled Deploy, will run on the latest version of Ubuntu 
+# (also the cheapest platform to perform Github Actions). It will 
+# - check out the 'main' branch
+# - Download and install Node.js, adding it to the PATH. Download any NPM
+# dependencies.
+# - npm run build does what is specified in package.json. Primarily, building 
+# or prep tasks for the project.
+# - Configures AWS creds stored as secrets in repo.
+# Pushes build to S3 bucket using AWS sync.
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -14,11 +25,11 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
 
-      - name: Install Dependecies
-        run: npm install
+      #- name: Install Dependecies
+      #  run: npm install
 
-      - name: Build Static File
-        run: npm run build
+      #- name: Build Static File
+      #  run: npm run build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
