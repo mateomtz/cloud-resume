@@ -13,7 +13,7 @@ export const Navbar = () => {
         {/* change src to {getImageUrl("nav/menuIcon.png")}, for some reason it's not returning the */}
         <img
           className={styles.menuBtn}
-          src="/assets/nav/menuIcon.png"
+          src={getImageUrl("nav/menuIcon.png")}
           alt="menu-button"
         />
         <ul className={styles.menuItems}>
