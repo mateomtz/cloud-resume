@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import styles from "./Navbar.module.css";
 import { getImageUrl } from "../../utils";
+import menuIcon from "../../assets/nav/menuIcon.png";
 
 export const Navbar = () => {
   return (
@@ -10,10 +11,9 @@ export const Navbar = () => {
         Portfolio
       </a>
       <div className={styles.menu}>
-        {/* change src to {getImageUrl("nav/menuIcon.png")}, for some reason it's not returning the */}
         <img
           className={styles.menuBtn}
-          src={getImageUrl("nav/menuIcon.png")}
+          src={menuIcon}
           alt="menu-button"
         />
         <ul className={styles.menuItems}>
